@@ -1,27 +1,38 @@
-// THINGIVERSE VARIABLES ( even though it stopped working a few years ago)
+// THINGIVERSE VARIABLES
+
 // Polygon quality slider (less is faster)
-quality_numerical_slider = 20;// [10:20]
-//Select sets
-text_drop_down_box = "all";// [all,alphabetic,numeric,symbols,functions,commands,swedish]
+quality_numerical_slider = 15;// [10:20]
+
+// Select set
+setSelection_drop_down_box = "all";// [all,alphabetic,numeric,symbols,functions,commands,swedish]
+
 // Thickness of the bottom base in mm
 baseHeight_text_box = 0.4;
+
 // Key Size in mm
 keySize_text_box = 9.5;
+
 // Key corner rounding radius in mm (min 2.2)
 cornerRadius_text_box = 2.2;
+
 // Braille scale Multiplier
 brailleScale_text_box = 1;
 
-////////////////////////
-// Regular Variables //
-//////////////////////
+// DotType
+dotType_drop_down_box = "sphere";// [sphere, cylinder]
+
+// Tile Spacing
+tileSpacing_numerical_slider = 2;// [0,10]
+
+// Regular OpenSCAD Variables
 $fn = quality_numerical_slider;// Quality
 baseHeight = baseHeight_text_box;// Base Height mm
 keySize = keySize_text_box;// Base Size mm^2
 cornerRadius = cornerRadius_text_box;// How round to make the corners?
 scaleBraille = brailleScale_text_box;
-
-tileSpacing = 2;
+dotType = dotType_drop_down_box;
+tileSpacing = tileSpacing_numerical_slider;
+setSelection = setSelection_drop_down_box;
 
 // Braille medical standards
 std_a = 2.5 * scaleBraille;// Horzontal dot to dot
@@ -137,6 +148,7 @@ module drawTile(symbol, xOffset, yOffset){
 }
 
 module drawDoubleTile(symbol1, symbol2, xOffset = 0, yOffset = 0){
+//translate([(xOffset*keySize)+(tileSpacing*xOffset),-keySize*yOffset-(tileSpacing*yOffset),0]){//translate([(xOffset*keySize)+(tileSpacing*xOffset),-keySize*yOffset-(tileSpacing*yOffset),0]){
   translate([(xOffset * (keySize + tileSpacing)), -yOffset * (keySize + tileSpacing), 0]){
     backplate();
     intersection(){
@@ -148,7 +160,7 @@ module drawDoubleTile(symbol1, symbol2, xOffset = 0, yOffset = 0){
 }
 
 // Display at position 0 if not rendering 'all' tile sets
-function yPositionModifier(nonAllPos) = text_drop_down_box == "all"?nonAllPos:0;
+function yPositionModifier(nonAllPos) = setSelection == "all"?nonAllPos:0;
 
 module backplate(){
   translate([cornerRadius, cornerRadius, 0]){
@@ -162,7 +174,12 @@ module backplate(){
 
 module placeDot(placeX, placeY, dotSize, dotHeight){
   translate([placeX, placeY, baseHeight]){
-    sphere(r = dotRadius * scaleBraille / dotSize);
+    if(dotType == "sphere"){
+      sphere(r = dotRadius * scaleBraille / dotSize);
+    }else{
+      cylinder(r = dotRadius * scaleBraille / dotSize);
+    }
+
   }
 }
 
@@ -199,16 +216,16 @@ module Char_display_standard2(glyph1, glyph2){
 // Render a Label for the row
 module renderLabel(yPos, info){
   if($preview){
-    translate([-40, -(yPos * (keySize + tileSpacing) - tileSpacing)]){
+    translate([-40, -(yPos * (keySize + tileSpacing) - 5 / 2)]){
       text(info, size = 5);
     }
   }
 }
 
 // DRAW LETTERS
-if(text_drop_down_box == "alphabetic" || text_drop_down_box == "all"){
-  renderLabel(0, "alphabetic");
-  for(i = [0:11]){
+if(setSelection == "alphabetic" || setSelection == "all"){
+  renderLabel(0, "alphabet");
+  for(i = [0:10]){
     drawTile(alphabet[i], i, 0);
   }
   for(i = [11:21]){
@@ -220,15 +237,15 @@ if(text_drop_down_box == "alphabetic" || text_drop_down_box == "all"){
 }
 
 // DRAW NUMBERS
-if(text_drop_down_box == "numeric" || text_drop_down_box == "all"){
+if(setSelection == "numeric" || setSelection == "all"){
   renderLabel(yPositionModifier(3), "numbers");
   for(i = [0:len(numbers) - 1]){
-    drawTile(numbers[i], i, yPositionModifier(3));
+    drawDoubleTile(numbersign, numbers[i], i, yPositionModifier(3));
   }
 }
 
 // DRAW SYMBOL KEYS
-if(text_drop_down_box == "symbols" || text_drop_down_box == "all"){
+if(setSelection == "symbols" || setSelection == "all"){
   renderLabel(yPositionModifier(4), "symbols");
   for(i = [0:len(symbols) - 1]){
     drawTile(symbols[i], i, yPositionModifier(4));
@@ -236,7 +253,7 @@ if(text_drop_down_box == "symbols" || text_drop_down_box == "all"){
 }
 
 // DRAW FUNCTION KEYS
-if(text_drop_down_box == "functions" || text_drop_down_box == "all"){
+if(setSelection == "functions" || setSelection == "all"){
   renderLabel(yPositionModifier(5), "functions");
   for(i = [0:len(numbers) - 1]){
     drawDoubleTile(f, numbers[i], i, yPositionModifier(5));
@@ -244,7 +261,7 @@ if(text_drop_down_box == "functions" || text_drop_down_box == "all"){
 }
 
 // DRAW COMMAND KEYS
-if(text_drop_down_box == "commands" || text_drop_down_box == "all"){
+if(setSelection == "commands" || setSelection == "all"){
   renderLabel(yPositionModifier(6), "commands");
   for(i = [0:len(commands) - 1]){
     drawDoubleTile(commands[i][0], commands[i][1], i, yPositionModifier(6));
@@ -252,7 +269,7 @@ if(text_drop_down_box == "commands" || text_drop_down_box == "all"){
 }
 
 // DRAW SWEDISH KEYS
-if(text_drop_down_box == "swedish" || text_drop_down_box == "all"){
+if(setSelection == "swedish" || setSelection == "all"){
   renderLabel(yPositionModifier(7), "swedish");
   for(i = [0:len(swedish) - 1]){
     drawTile(swedish[i], i, yPositionModifier(7));
