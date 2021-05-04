@@ -1,0 +1,15 @@
+{
+  "name": "braille_tiles",
+  "version": "2.4.0",
+  "description": "OpenSCAD Braille Tile Generator",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "keyboard",
+    "braille",
+    "tile"
+  ],
+  "author": "David Kerr",
+  "license": "lgpl-3.0"
+}
