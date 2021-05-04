@@ -1,7 +1,7 @@
 // THINGIVERSE VARIABLES
 
 // Polygon quality slider (less is faster)
-quality_numerical_slider = 15;// [10:20]
+quality_numerical_slider = 10;// [10:20]
 
 // Select set
 setSelection_drop_down_box = "all";// [all,alphabetic,numeric,symbols,functions,commands,swedish]
@@ -22,7 +22,7 @@ brailleScale_text_box = 1;
 dotType_drop_down_box = "sphere";// [sphere, cylinder]
 
 // Tile Spacing
-tileSpacing_numerical_slider = 2;// [0,10]
+tileSpacing_numerical_slider = 2;// [0:10]
 
 // Regular OpenSCAD Variables
 $fn = quality_numerical_slider;// Quality
@@ -43,9 +43,12 @@ std_e = 10 * scaleBraille;// line spacing
 std_f = 0.3 * scaleBraille;// raised Height
 std_g = 1.4 * scaleBraille;// Dot Size
 
-dotRadius = 0.7;// Dot Size Multiplier
-dotDepth = 1;// How much to raise the braille mm
-_0 = [0, 0, 0];// Per dot | Depth, Size, Offset
+// Dot Size Multiplier
+dotRadius = 0.7;
+// How much to raise the braille mm
+dotDepth = 1;
+
+_0 = [0, 0, 0];
 _1 = [dotDepth / 2, dotRadius / 0.5, dotRadius * 0.3];
 _2 = [dotDepth, dotRadius, 0];
 
@@ -148,7 +151,6 @@ module drawTile(symbol, xOffset, yOffset){
 }
 
 module drawDoubleTile(symbol1, symbol2, xOffset = 0, yOffset = 0){
-//translate([(xOffset*keySize)+(tileSpacing*xOffset),-keySize*yOffset-(tileSpacing*yOffset),0]){//translate([(xOffset*keySize)+(tileSpacing*xOffset),-keySize*yOffset-(tileSpacing*yOffset),0]){
   translate([(xOffset * (keySize + tileSpacing)), -yOffset * (keySize + tileSpacing), 0]){
     backplate();
     intersection(){
