@@ -1,0 +1,122 @@
+{
+  "parameterSets": {
+    "design default values": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "10",
+      "setSelection_drop_down_box": "all",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "all": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "all",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "alphabetic": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "alphabetic",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "numeric": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "numeric",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "symbols": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "symbols",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "functions": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "functions",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "commands": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "commands",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "swedish": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "20",
+      "setSelection_drop_down_box": "swedish",
+      "tileSpacing_numerical_slider": "2"
+    },
+    "test": {
+      "_0": "[0, 0, 0]",
+      "baseHeight_text_box": "0.4",
+      "brailleScale_text_box": "1",
+      "cornerRadius_text_box": "2.2",
+      "dotDepth": "1",
+      "dotRadius": "0.7",
+      "dotType_drop_down_box": "sphere",
+      "keySize_text_box": "9.5",
+      "quality_numerical_slider": "4",
+      "setSelection_drop_down_box": "swedish",
+      "tileSpacing_numerical_slider": "2"
+    }
+  },
+  "fileFormatVersion": "1"
+}

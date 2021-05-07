@@ -1,0 +1,48 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release Tag'  
+        required: true
+        default: 'v'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install OpenScad
+        run: |
+          sudo add-apt-repository ppa:openscad/releases
+          sudo apt-get install openscad
+          ls
+      - name: Convert swedish OpenScad
+        run: | 
+          declare -a arr=("alphabetic" "symbols" "functions" "commands" "swedish" "numeric" "all")
+          for i in "${arr[@]}"
+            do
+              echo Creating $i.stl
+              openscad -o braille_keyboard_covers-${{ github.event.inputs.tag }}.$i.stl -p ./braille_keyboard_covers.json -P $i ./braille_keyboard_covers.scad
+          done
+
+      - id: get_version
+        uses: battila7/get-version-action@v2
+      - name: Copy SCAD file
+        run: cp ./braille_keyboard_covers.scad ./braille_keyboard_covers-${{ github.event.inputs.tag }}.scad
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.tag }}
+          name: Release ${{ github.event.inputs.tag }}
+          files: |
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.scad
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.all.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.alphabetic.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.numeric.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.symbols.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.functions.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.commands.stl
+            braille_keyboard_covers-${{ github.event.inputs.tag }}.swedish.stl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
